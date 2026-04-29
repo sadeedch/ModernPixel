@@ -10,7 +10,7 @@ export default function ContactFaq() {
     <section className="contact-section">
       <div className="contact-copy reveal">
         <span className="intro-label inline"><span /> Contact</span>
-        <h2>Ready to make your website feel premium?</h2>
+        <h2>Ready to make your website feel premium?</h2> <br/><br/><br/>
         <p>Tell us what you are building and we’ll help you shape a sharp, modern, conversion-focused digital experience.</p>
       </div>
       <div className="faq-box reveal">

@@ -78,10 +78,13 @@ export default function Hero() {
           <b>Premium Digital Websites</b>
         </div>
 
-        <h1>Scale Your Brand With Modern Web Design</h1>
+        <h1 style={{fontSize: "150px", color: "rgb(18, 18, 95)"}}>Scale Your Brand </h1>
+        <h1 style={{fontSize: "80px", color: "rgb(114, 114, 138)"}}>with</h1>
+         <h1 style={{fontSize: "120px" , color: "rgb(18, 18, 95)"}}>Modern Web Design</h1>
 
         <p>
-          We create premium websites, SaaS interfaces, and SEO-ready digital
+          ModernPixel is a Brisbane based web design agency 
+          creating premium websites, SaaS interfaces, and SEO-ready digital
           experiences for Australian businesses that want to look sharper and
           convert better.
         </p>

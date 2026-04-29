@@ -1189,3 +1189,139 @@ button { font: inherit; color: inherit; }
 }
 
 
+
+.case-visual-card {
+  width: min(360px, 100%);
+  min-height: 210px;
+  border-radius: 28px;
+  padding: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.72)),
+    linear-gradient(135deg, rgba(196, 181, 253, 0.9), rgba(99, 102, 241, 0.75));
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  color: #191724;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-visual-card::before {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -70px;
+  top: -70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.case-visual-card::after {
+  content: '';
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  left: -50px;
+  bottom: -50px;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.18);
+}
+
+.case-top-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.case-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.case-top-row span {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(25, 23, 36, 0.58);
+}
+
+.case-top-row strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 24px;
+  line-height: 1.05;
+}
+
+.case-visual-card p {
+  position: relative;
+  z-index: 1;
+  margin: 22px 0 18px;
+  max-width: 280px;
+  color: rgba(25, 23, 36, 0.72);
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.case-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.case-chips span {
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.66);
+  color: rgba(25, 23, 36, 0.72);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.case-bottom {
+  position: relative;
+  z-index: 1;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.case-bottom strong {
+  display: block;
+  font-size: 32px;
+  line-height: 1;
+  color: #191724;
+}
+
+.case-bottom span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(25, 23, 36, 0.58);
+}
+
+.case-bottom button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: #191724;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+}
