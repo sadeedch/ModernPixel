@@ -109,6 +109,7 @@ const faqSchema = {
       <SiteEffects />
       <Hero />
       <Services />
+      <br/><br/>
       <About />
       <CrossMarquee />
       <Work />

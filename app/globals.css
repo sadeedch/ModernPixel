@@ -659,7 +659,7 @@ button { font: inherit; color: inherit; }
 .strip div { display: flex; align-items: center; width: max-content; animation: marquee 22s linear infinite; }
 .strip span { white-space: nowrap; font-size: 29px; font-weight: 900; letter-spacing: -0.05em; padding: 0 32px; }
 .strip b { font-size: 34px; }
-.strip-black { top: 42px; transform: rotate(5deg); background: #17151f; }
+.strip-black { top: 42px; transform: rotate(5deg); background: #a73166; }
 .strip-purple { top: 78px; transform: rotate(-5deg); background: var(--purple); }
 .strip-purple div { animation-direction: reverse; animation-duration: 25s; }
 
@@ -1325,3 +1325,8 @@ button { font: inherit; color: inherit; }
   font-size: 13px;
   font-weight: 900;
 }
+
+
+
+
+
