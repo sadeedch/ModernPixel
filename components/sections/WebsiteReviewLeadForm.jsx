@@ -12,8 +12,6 @@ const projectTypes = [
   'Not sure yet',
 ];
 
-
-
 export default function WebsiteReviewLeadForm() {
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState('idle');
@@ -81,7 +79,10 @@ ${data.projectMessage}
       window.location.href = `mailto:contact@modernpixel.com.au?subject=${subject}&body=${body}`;
 
       setStatus('success');
-      setMessage('Your email app should open now. To make this form submit automatically, add a Web3Forms access key.');
+      setMessage(
+        'Your email app should open now. To make this form submit automatically, add a Web3Forms access key.'
+      );
+
       form.reset();
       return;
     }
@@ -100,10 +101,9 @@ ${data.projectMessage}
           name: data.name,
           business_name: data.businessName,
           email: data.email,
-          phone: data.phone,
-          current_website: data.currentWebsite,
+          phone: data.phone || 'Not provided',
+          current_website: data.currentWebsite || 'Not provided',
           project_type: data.projectType,
-          budget_range: data.budgetRange,
           message: data.projectMessage,
           botcheck: data.botcheck || '',
         }),
@@ -116,11 +116,16 @@ ${data.projectMessage}
       }
 
       setStatus('success');
-      setMessage('Thanks, your request has been sent. We’ll review your details and get back to you shortly.');
+      setMessage(
+        'Thanks, your request has been sent. We’ll review your details and get back to you shortly.'
+      );
+
       form.reset();
     } catch (error) {
       setStatus('error');
-      setMessage('Something went wrong. Please email contact@modernpixel.com.au directly.');
+      setMessage(
+        'Something went wrong. Please email contact@modernpixel.com.au directly.'
+      );
     }
   };
 
@@ -150,14 +155,14 @@ ${data.projectMessage}
           </button>
 
           <div className="lead-proof">
-           
+            <span className="lead-kicker">ModernPixel Website Review</span>
 
-            <h2>
-              Want a website that looks premium and brings more enquiries?
-            </h2>
+            <h2>Want a website that looks premium and brings more enquiries?</h2>
 
             <p>
-              Tell us a little about your business and we’ll suggest the best next step, whether that is a redesign, a landing page, or a new website.
+              Tell us a little about your business and we’ll suggest the best
+              next step, whether that is a redesign, a landing page, or a new
+              website.
             </p>
 
             <div className="lead-proof-grid">
@@ -183,9 +188,10 @@ ${data.projectMessage}
           <form className="lead-form" onSubmit={handleSubmit}>
             <div className="lead-form-heading">
               <span>Quick enquiry</span>
-              <h3>Get your free website review</h3>
+              <h3>Free website review</h3>
               <p>
-                No pressure. Send your details and we’ll tell you what can be improved.
+                No pressure. Send your details and we’ll tell you what can be
+                improved.
               </p>
             </div>
 
@@ -205,12 +211,22 @@ ${data.projectMessage}
 
               <label>
                 Business name *
-                <input name="businessName" type="text" required placeholder="Business name" />
+                <input
+                  name="businessName"
+                  type="text"
+                  required
+                  placeholder="Business name"
+                />
               </label>
 
               <label>
                 Email *
-                <input name="email" type="email" required placeholder="you@email.com" />
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="you@email.com"
+                />
               </label>
 
               <label>
@@ -228,35 +244,20 @@ ${data.projectMessage}
               />
             </label>
 
-            <div className="lead-field-grid">
-              <label>
-                What do you need help with? *
-                <select name="projectType" required defaultValue="">
-                  <option value="" disabled>
-                    Select one
-                  </option>
-                  {projectTypes.map((item) => (
-                    <option key={item} value={item}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-              </label>
+            <label>
+              What do you need help with? *
+              <select name="projectType" required defaultValue="">
+                <option value="" disabled>
+                  Select one
+                </option>
 
-              <label>
-                Budget range *
-                <select name="budgetRange" required defaultValue="">
-                  <option value="" disabled>
-                    Select one
+                {projectTypes.map((item) => (
+                  <option key={item} value={item}>
+                    {item}
                   </option>
-                  {budgetRanges.map((item) => (
-                    <option key={item} value={item}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
+                ))}
+              </select>
+            </label>
 
             <label>
               What are you trying to improve? *
@@ -268,11 +269,7 @@ ${data.projectMessage}
               />
             </label>
 
-            {message && (
-              <p className={`lead-status ${status}`}>
-                {message}
-              </p>
-            )}
+            {message && <p className={`lead-status ${status}`}>{message}</p>}
 
             <button
               type="submit"
