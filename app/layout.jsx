@@ -68,7 +68,25 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-AU">
+    // <html lang="en-AU">
+    //   <body>{children}</body>
+    // </html>
+
+      <html lang="en">
+      <head>
+
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TN4552DRJ3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TN4552DRJ3');
+</script>
+
+      </head>
+
       <body>{children}</body>
     </html>
   );
