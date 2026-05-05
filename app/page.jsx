@@ -7,6 +7,7 @@ import Work from '@/components/sections/Work';
 import Testimonials from '@/components/sections/Testimonials';
 import ContactFaq from '@/components/sections/ContactFaq';
 import Footer from '@/components/layout/Footer';
+import WebsiteReviewLeadForm from '@/components/sections/WebsiteReviewLeadForm';
 
 export default function HomePage() {
 
@@ -116,6 +117,7 @@ const faqSchema = {
       <Testimonials />
       <ContactFaq />
       <Footer />
+      <WebsiteReviewLeadForm />
     </main>
     </>
   );
