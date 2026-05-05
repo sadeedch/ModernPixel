@@ -132,26 +132,31 @@ ${data.projectMessage}
   return (
     <>
 
-      <button
+   <button
   type="button"
-  className="lead-float-button lead-float-kooka"
+  className="lead-float-button lead-float-kooka-v2"
   onClick={() => setIsOpen(true)}
   aria-label="Open free website review form"
 >
-  <span className="kooka-badge" aria-hidden="true">
-    <span className="kooka-head">
-      <i className="kooka-crest" />
-      <i className="kooka-eye" />
-      <i className="kooka-beak-top" />
-      <i className="kooka-beak-bottom" />
-      <i className="kooka-neck" />
-    </span>
-    <span className="kooka-arrow">↗</span>
+  <span className="kooka-v2" aria-hidden="true">
+    <i className="kooka-v2-shadow" />
+    <i className="kooka-v2-body" />
+    <i className="kooka-v2-wing" />
+    <i className="kooka-v2-head" />
+    <i className="kooka-v2-face" />
+    <i className="kooka-v2-eye" />
+    <i className="kooka-v2-beak" />
+    <i className="kooka-v2-feather feather-one" />
+    <i className="kooka-v2-feather feather-two" />
   </span>
 
   <span className="lead-float-copy">
-    <small>Free expert review</small>
-    <strong>Website Review</strong>
+    <small>Need a sharper site?</small>
+    <strong>Free Website Review</strong>
+  </span>
+
+  <span className="lead-float-arrow" aria-hidden="true">
+    ↙
   </span>
 </button>
 
