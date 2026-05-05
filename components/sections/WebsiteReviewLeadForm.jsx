@@ -221,8 +221,7 @@ ${data.projectMessage}
               <span>Quick enquiry</span>
               <h3>Free website review</h3>
               <p>
-                No pressure. Send your details and we’ll tell you what can be
-                improved.
+              No pressure. Share your details and we'll show you exactly what's holding your digital presence back.
               </p>
             </div>
 
