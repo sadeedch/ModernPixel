@@ -2315,3 +2315,256 @@ button { font: inherit; color: inherit; }
     font-size: 13px;
   }
 }
+
+
+
+/* KOOKABURRA STYLE FLOATING REVIEW WIDGET */
+
+.lead-float-kooka {
+  right: 24px;
+  bottom: 24px;
+  min-height: 76px;
+  padding: 9px 22px 9px 10px;
+  gap: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.14), transparent 24%),
+    linear-gradient(135deg, #17151f 0%, #232033 58%, #6e52bd 100%);
+  box-shadow:
+    0 26px 80px rgba(23, 21, 31, 0.32),
+    0 0 0 1px rgba(110, 82, 189, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: visible;
+  isolation: isolate;
+  transition: 0.28s ease;
+}
+
+.lead-float-kooka:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow:
+    0 34px 100px rgba(110, 82, 189, 0.34),
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.lead-float-kooka::after {
+  content: 'FREE';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #17151f;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  box-shadow: 0 10px 26px rgba(23, 21, 31, 0.18);
+}
+
+.kooka-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  border-radius: 999px;
+  background:
+    linear-gradient(145deg, #ffffff 0%, #f8f6ff 52%, #ddd2ff 100%);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.2),
+    inset -8px -8px 0 rgba(110, 82, 189, 0.08);
+  overflow: hidden;
+}
+
+.kooka-head {
+  position: relative;
+  width: 34px;
+  height: 24px;
+  border-radius: 55% 55% 48% 58%;
+  background: linear-gradient(180deg, #fbfbff 0%, #f1ebff 100%);
+  transform: translateX(-2px);
+}
+
+.kooka-head::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 7px;
+  width: 23px;
+  height: 11px;
+  border-radius: 999px;
+  background: #6e52bd;
+  transform: rotate(-18deg);
+  opacity: 0.9;
+}
+
+.kooka-head::after {
+  content: '';
+  position: absolute;
+  left: 7px;
+  bottom: -6px;
+  width: 17px;
+  height: 10px;
+  border-radius: 0 0 12px 12px;
+  background: #ece6ff;
+}
+
+.kooka-crest {
+  position: absolute;
+  top: -4px;
+  left: 8px;
+  width: 10px;
+  height: 7px;
+  border-radius: 10px 10px 2px 2px;
+  background: #e7defe;
+  transform: rotate(-10deg);
+}
+
+.kooka-eye {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #17151f;
+  box-shadow: 0 0 0 2px rgba(110, 82, 189, 0.08);
+  z-index: 2;
+}
+
+.kooka-beak-top {
+  position: absolute;
+  right: -13px;
+  top: 8px;
+  width: 19px;
+  height: 8px;
+  background: linear-gradient(135deg, #f0b437, #f59f0b);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  border-radius: 2px;
+}
+
+.kooka-beak-bottom {
+  position: absolute;
+  right: -10px;
+  top: 14px;
+  width: 14px;
+  height: 6px;
+  background: linear-gradient(135deg, #ffcf66, #ffb347);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  border-radius: 2px;
+}
+
+.kooka-neck {
+  position: absolute;
+  left: 7px;
+  bottom: -7px;
+  width: 14px;
+  height: 10px;
+  border-radius: 0 0 10px 10px;
+  background: #ffffff;
+}
+
+.kooka-arrow {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #17151f;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 950;
+  line-height: 1;
+  box-shadow: 0 6px 16px rgba(23, 21, 31, 0.22);
+}
+
+.lead-float-kooka .lead-float-copy {
+  display: grid;
+  gap: 3px;
+  text-align: left;
+}
+
+.lead-float-kooka .lead-float-copy small {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.lead-float-kooka .lead-float-copy strong {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 950;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .lead-float-kooka {
+    right: 14px;
+    bottom: 14px;
+    min-height: 62px;
+    padding: 7px 16px 7px 7px;
+    gap: 10px;
+  }
+
+  .lead-float-kooka::after {
+    top: -8px;
+    right: 16px;
+    padding: 3px 8px;
+    font-size: 9px;
+  }
+
+  .kooka-badge {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
+
+  .kooka-head {
+    width: 28px;
+    height: 20px;
+  }
+
+  .kooka-eye {
+    top: 6px;
+    right: 7px;
+    width: 5px;
+    height: 5px;
+  }
+
+  .kooka-beak-top {
+    right: -11px;
+    top: 7px;
+    width: 16px;
+    height: 7px;
+  }
+
+  .kooka-beak-bottom {
+    right: -8px;
+    top: 12px;
+    width: 12px;
+    height: 5px;
+  }
+
+  .kooka-arrow {
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+
+  .lead-float-kooka .lead-float-copy small {
+    font-size: 10px;
+  }
+
+  .lead-float-kooka .lead-float-copy strong {
+    font-size: 13px;
+  }
+}
