@@ -380,11 +380,28 @@ const previews = [WebsiteDesignPreview, UIUXPreview, DigitalMarketingPreview, Br
 export default function Services() {
   const [active, setActive] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const prevRef = useRef(0);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 900);
+    };
+
+    checkMobile();
+
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   const handleHover = (index) => {
     if (index === active) return;
+
     setAnimating(true);
+
     setTimeout(() => {
       prevRef.current = active;
       setActive(index);
@@ -395,62 +412,85 @@ export default function Services() {
   const PreviewComponent = previews[active];
 
   return (
-    <section id="services" style={{
-      background: 'linear-gradient(135deg, #0f0e1a 0%, #12102a 60%, #0f0e1a 100%)',
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      padding: '80px 0',
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
-      {/* Subtle radial glow behind active service */}
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '25%',
-        transform: 'translate(-50%, -50%)',
-        width: '600px',
-        height: '600px',
-        background: `radial-gradient(circle, ${services[active].accent}18 0%, transparent 70%)`,
-        transition: 'background 0.6s ease',
-        pointerEvents: 'none',
-      }} />
-
-
-{/* for the formatting */}
-      <div style={{
-        maxWidth: '1440px',
-        margin: '0 auto',
-        padding: '0 30px',
-        width: '100%',
-        display: 'grid',
-        gridTemplateColumns: '1fr 600px',
-        gap: '48px',
+    <section
+      id="services"
+      style={{
+        background:
+          'linear-gradient(135deg, #0f0e1a 0%, #12102a 60%, #0f0e1a 100%)',
+        minHeight: isMobile ? 'auto' : '100vh',
+        display: 'flex',
         alignItems: 'center',
-      
-      }}>
-        {/* ── Service list ── */}
+        padding: isMobile ? '70px 0 86px' : '80px 0',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          top: isMobile ? '28%' : '50%',
+          left: isMobile ? '50%' : '25%',
+          transform: 'translate(-50%, -50%)',
+          width: isMobile ? '420px' : '600px',
+          height: isMobile ? '420px' : '600px',
+          background: `radial-gradient(circle, ${services[active].accent}18 0%, transparent 70%)`,
+          transition: 'background 0.6s ease',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div
+        style={{
+          maxWidth: '1440px',
+          margin: '0 auto',
+          padding: isMobile ? '0 22px' : '0 30px',
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 600px',
+          gap: isMobile ? '38px' : '48px',
+          alignItems: 'center',
+        }}
+      >
+        {/* Service list */}
         <div>
-          {/* Section label */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            marginBottom: '48px',
-          }}>
-            <div style={{ width: '32px', height: '1px', background: services[active].accent, transition: 'background 0.4s' }} />
-            <span style={{ color: services[active].accent, fontSize: '11px', letterSpacing: '3px', textTransform: 'uppercase', fontWeight: 600, transition: 'color 0.4s' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginBottom: isMobile ? '34px' : '48px',
+            }}
+          >
+            <div
+              style={{
+                width: '32px',
+                height: '1px',
+                background: services[active].accent,
+                transition: 'background 0.4s',
+              }}
+            />
+
+            <span
+              style={{
+                color: services[active].accent,
+                fontSize: '11px',
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                fontWeight: 600,
+                transition: 'color 0.4s',
+              }}
+            >
               What We Do
             </span>
           </div>
 
           {services.map((service, index) => {
             const isActive = active === index;
+
             return (
               <button
                 key={service.title}
-                onMouseEnter={() => handleHover(index)}
+                onMouseEnter={() => !isMobile && handleHover(index)}
                 onFocus={() => handleHover(index)}
                 onClick={() => handleHover(index)}
                 type="button"
@@ -463,151 +503,201 @@ export default function Services() {
                   display: 'block',
                 }}
               >
-                {/* Top divider */}
-                <div style={{
-                  height: '1px',
-                  background: isActive
-                    ? `linear-gradient(to right, ${service.accent}80, ${service.accent}10)`
-                    : 'rgba(255,255,255,0.07)',
-                  transition: 'background 0.4s ease',
-                }} />
+                <div
+                  style={{
+                    height: '1px',
+                    background: isActive
+                      ? `linear-gradient(to right, ${service.accent}80, ${service.accent}10)`
+                      : 'rgba(255,255,255,0.07)',
+                    transition: 'background 0.4s ease',
+                  }}
+                />
 
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '28px 0',
-                  position: 'relative',
-                }}>
-                  {/* Active bar */}
-                  {isActive && (
-                    <div style={{
-                      position: 'absolute',
-                      left: '-48px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      width: '3px',
-                      height: '40px',
-                      background: service.accent,
-                      borderRadius: '2px',
-                      transition: 'background 0.4s',
-                    }} />
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: isMobile ? '22px 0' : '28px 0',
+                    position: 'relative',
+                  }}
+                >
+                  {isActive && !isMobile && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        left: '-48px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        width: '3px',
+                        height: '40px',
+                        background: service.accent,
+                        borderRadius: '2px',
+                        transition: 'background 0.4s',
+                      }}
+                    />
                   )}
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-                    {/* Number tag */}
-                    <span style={{
-                      fontSize: '11px',
-                      fontFamily: 'monospace',
-                      color: isActive ? service.accent : 'rgba(255,255,255,0.2)',
-                      transition: 'color 0.4s',
-                      minWidth: '24px',
-                    }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: isMobile ? '16px' : '24px',
+                      minWidth: 0,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: '11px',
+                        fontFamily: 'monospace',
+                        color: isActive
+                          ? service.accent
+                          : 'rgba(255,255,255,0.24)',
+                        transition: 'color 0.4s',
+                        minWidth: '24px',
+                      }}
+                    >
                       {service.tag}
                     </span>
 
-                    <div style={{ textAlign: 'left' }}>
-                      <div style={{
-                        fontSize: 'clamp(24px, 4vw, 70px)',
-                        fontWeight: 800,
-                        letterSpacing: '-1px',
-                        color: isActive ? '#ffffff' : 'rgba(255,255,255,0.35)',
-                        transition: 'color 0.4s ease, transform 0.3s ease',
-                        transform: isActive ? 'translateX(8px)' : 'translateX(0)',
-                        lineHeight: 1.1,
-                      }}>
+                    <div style={{ textAlign: 'left', minWidth: 0 }}>
+                      <div
+                        style={{
+                          fontSize: isMobile
+                            ? 'clamp(28px, 8vw, 42px)'
+                            : 'clamp(24px, 4vw, 70px)',
+                          fontWeight: 800,
+                          letterSpacing: '-1px',
+                          color: isActive
+                            ? '#ffffff'
+                            : 'rgba(255,255,255,0.35)',
+                          transition: 'color 0.4s ease, transform 0.3s ease',
+                          transform:
+                            isActive && !isMobile
+                              ? 'translateX(8px)'
+                              : 'translateX(0)',
+                          lineHeight: 1.05,
+                        }}
+                      >
                         {service.title}
                       </div>
-                      <div style={{
-                        fontSize: '13px',
-                        color: isActive ? service.accent : 'transparent',
-                        transition: 'color 0.4s ease',
-                        marginTop: '4px',
-                        fontWeight: 400,
-                        letterSpacing: '0.2px',
-                      }}>
+
+                      <div
+                        style={{
+                          fontSize: isMobile ? '14px' : '13px',
+                          color: isActive ? service.accent : 'transparent',
+                          transition: 'color 0.4s ease',
+                          marginTop: '7px',
+                          fontWeight: 500,
+                          letterSpacing: '0.2px',
+                          maxWidth: isMobile ? '240px' : 'none',
+                          lineHeight: 1.35,
+                        }}
+                      >
                         {service.subtitle}
                       </div>
                     </div>
                   </div>
 
-                  {/* Arrow */}
                   <svg
-                    width="24"
-                    height="24"
+                    width={isMobile ? '22' : '24'}
+                    height={isMobile ? '22' : '24'}
                     viewBox="0 0 24 24"
                     fill="none"
                     style={{
                       opacity: isActive ? 1 : 0,
-                      transform: isActive ? 'translateX(0) rotate(0deg)' : 'translateX(-8px) rotate(-45deg)',
+                      transform: isActive
+                        ? 'translateX(0) rotate(0deg)'
+                        : 'translateX(-8px) rotate(-45deg)',
                       transition: 'all 0.35s ease',
                       color: service.accent,
                       flexShrink: 0,
                     }}
                   >
-                    <path d="M5 12H19M12 5L19 12L12 19" stroke={service.accent} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M5 12H19M12 5L19 12L12 19"
+                      stroke={service.accent}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </button>
             );
           })}
 
-          {/* Bottom divider */}
-          <div style={{ height: '1px', background: 'rgba(255,255,255,0.07)' }} />
+          <div
+            style={{
+              height: '1px',
+              background: 'rgba(255,255,255,0.07)',
+            }}
+          />
         </div>
 
-        {/* ── Preview panel ── */}
-        <div style={{
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          {/* Outer glow ring */}
-          <div style={{
-            position: 'absolute',
-            inset: '-20px',
-            borderRadius: '28px',
-            background: `radial-gradient(ellipse at center, ${services[active].accent}20 0%, transparent 70%)`,
-            transition: 'background 0.6s ease',
-          }} />
-
-          {/* Card */}
-          <div style={{
-            width: '100%',
-            aspectRatio: '340 / 260',
-            borderRadius: '20px',
-            border: `1px solid ${services[active].accent}30`,
-            background: '#0f0e1a',
-            overflow: 'hidden',
+        {/* Preview panel */}
+        <div
+          style={{
             position: 'relative',
-            boxShadow: `0 0 60px ${services[active].accent}20, inset 0 1px 0 rgba(255,255,255,0.05)`,
-            transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
-            opacity: animating ? 0 : 1,
-            transform: animating ? 'scale(0.97) translateY(6px)' : 'scale(1) translateY(0)',
-            transitionProperty: 'border-color, box-shadow, opacity, transform',
-            transitionDuration: '0.4s, 0.4s, 0.2s, 0.2s',
-          }}>
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            maxWidth: isMobile ? '420px' : 'none',
+            margin: isMobile ? '0 auto' : 0,
+          }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              inset: isMobile ? '-12px' : '-20px',
+              borderRadius: isMobile ? '22px' : '28px',
+              background: `radial-gradient(ellipse at center, ${services[active].accent}20 0%, transparent 70%)`,
+              transition: 'background 0.6s ease',
+            }}
+          />
+
+          <div
+            style={{
+              width: '100%',
+              aspectRatio: '340 / 260',
+              borderRadius: isMobile ? '18px' : '20px',
+              border: `1px solid ${services[active].accent}30`,
+              background: '#0f0e1a',
+              overflow: 'hidden',
+              position: 'relative',
+              boxShadow: `0 0 ${
+                isMobile ? '38px' : '60px'
+              } ${services[active].accent}20, inset 0 1px 0 rgba(255,255,255,0.05)`,
+              opacity: animating ? 0 : 1,
+              transform: animating
+                ? 'scale(0.97) translateY(6px)'
+                : 'scale(1) translateY(0)',
+              transitionProperty: 'border-color, box-shadow, opacity, transform',
+              transitionDuration: '0.4s, 0.4s, 0.2s, 0.2s',
+            }}
+          >
             <PreviewComponent />
           </div>
 
-          {/* Service name badge */}
-          <div style={{
-            position: 'absolute',
-            bottom: '-18px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: services[active].accent,
-            color: '#0f0e1a',
-            fontSize: '11px',
-            fontWeight: 700,
-            letterSpacing: '1.5px',
-            textTransform: 'uppercase',
-            padding: '6px 16px',
-            borderRadius: '20px',
-            whiteSpace: 'nowrap',
-            transition: 'background 0.4s ease',
-          }}>
+          <div
+            style={{
+              position: 'absolute',
+              bottom: isMobile ? '-14px' : '-18px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              background: services[active].accent,
+              color: '#0f0e1a',
+              fontSize: isMobile ? '10px' : '11px',
+              fontWeight: 700,
+              letterSpacing: '1.5px',
+              textTransform: 'uppercase',
+              padding: isMobile ? '6px 13px' : '6px 16px',
+              borderRadius: '20px',
+              whiteSpace: 'nowrap',
+              transition: 'background 0.4s ease',
+            }}
+          >
             {services[active].title}
           </div>
         </div>
