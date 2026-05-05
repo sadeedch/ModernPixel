@@ -131,25 +131,28 @@ ${data.projectMessage}
 
   return (
     <>
-   <button
+
+      <button
   type="button"
-  className="lead-float-button lead-float-upgraded"
+  className="lead-float-button lead-float-kooka"
   onClick={() => setIsOpen(true)}
   aria-label="Open free website review form"
 >
-  <span className="lead-mascot" aria-hidden="true">
-    <i className="mascot-eye" />
-    <i className="mascot-beak" />
-    <i className="mascot-wing" />
-    <b>↙</b>
+  <span className="kooka-badge" aria-hidden="true">
+    <span className="kooka-head">
+      <i className="kooka-crest" />
+      <i className="kooka-eye" />
+      <i className="kooka-beak-top" />
+      <i className="kooka-beak-bottom" />
+      <i className="kooka-neck" />
+    </span>
+    <span className="kooka-arrow">↗</span>
   </span>
 
   <span className="lead-float-copy">
-    <small>Need a sharper website?</small>
-    <strong>Free Website Review</strong>
+    <small>Free expert review</small>
+    <strong>Website Review</strong>
   </span>
-
-  <span className="lead-pulse-dot" aria-hidden="true" />
 </button>
 
       <div className={`lead-modal ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
