@@ -2008,3 +2008,59 @@ button { font: inherit; color: inherit; }
     font-size: 22px;
   }
 }
+
+
+/* MOBILE HERO TEXT CENTER FIX */
+
+@media (max-width: 720px) {
+  .hero-center {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 14px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-center h1 {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: clamp(52px, 15.2vw, 76px);
+    line-height: 0.96;
+    letter-spacing: -0.075em;
+    transform: none;
+  }
+
+  .hero-center p {
+    width: 100%;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .rating-row {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero-center {
+    padding: 0 12px;
+  }
+
+  .hero-center h1 {
+    font-size: clamp(48px, 14.5vw, 68px);
+    letter-spacing: -0.07em;
+  }
+
+  .hero-center p {
+    max-width: 330px;
+  }
+}
