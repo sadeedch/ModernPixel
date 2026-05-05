@@ -12,13 +12,7 @@ const projectTypes = [
   'Not sure yet',
 ];
 
-const budgetRanges = [
-  'Under $1,500',
-  '$1,500 to $3,000',
-  '$3,000 to $5,000',
-  '$5,000+',
-  'Not sure yet',
-];
+
 
 export default function WebsiteReviewLeadForm() {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +73,6 @@ Email: ${data.email}
 Phone: ${data.phone || 'Not provided'}
 Current website: ${data.currentWebsite || 'Not provided'}
 Project type: ${data.projectType}
-Budget range: ${data.budgetRange}
 
 Message:
 ${data.projectMessage}
