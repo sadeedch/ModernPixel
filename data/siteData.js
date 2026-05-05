@@ -24,7 +24,7 @@ export const services = [
 ];
 
 export const stats = [
-  ['40+', 'Web Pages Designed'],
+  ['100+', 'Web Pages Designed'],
   ['94', 'Performance Scores'],
   ['24/7', 'Lead Capture Ready'],
   ['100%', 'Responsive Builds']
