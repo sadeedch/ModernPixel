@@ -131,15 +131,26 @@ ${data.projectMessage}
 
   return (
     <>
-      <button
-        type="button"
-        className="lead-float-button"
-        onClick={() => setIsOpen(true)}
-        aria-label="Open free website review form"
-      >
-        <span>↙</span>
-        <strong>Free Website Review</strong>
-      </button>
+   <button
+  type="button"
+  className="lead-float-button lead-float-upgraded"
+  onClick={() => setIsOpen(true)}
+  aria-label="Open free website review form"
+>
+  <span className="lead-mascot" aria-hidden="true">
+    <i className="mascot-eye" />
+    <i className="mascot-beak" />
+    <i className="mascot-wing" />
+    <b>↙</b>
+  </span>
+
+  <span className="lead-float-copy">
+    <small>Need a sharper website?</small>
+    <strong>Free Website Review</strong>
+  </span>
+
+  <span className="lead-pulse-dot" aria-hidden="true" />
+</button>
 
       <div className={`lead-modal ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
         <button
