@@ -150,7 +150,7 @@ ${data.projectMessage}
           </button>
 
           <div className="lead-proof">
-            <span className="lead-kicker">ModernPixel Website Review</span>
+           
 
             <h2>
               Want a website that looks premium and brings more enquiries?
