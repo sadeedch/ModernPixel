@@ -2596,3 +2596,63 @@ button { font: inherit; color: inherit; }
     height: 68px;
   }
 }
+
+
+
+/* Bird perched ON TOP of the pill, centered */
+.lead-float-kooka-v2 .kooka-v2 {
+  position: absolute;
+  left: 50%;
+  top: -68px;
+  bottom: auto;
+  transform: translateX(-50%);
+  width: 84px;
+  height: 84px;
+  overflow: visible;
+  animation: kookaBob 2.4s ease-in-out infinite;
+}
+
+/* Symmetric padding now that bird is above, not left */
+.lead-float-kooka-v2 {
+  padding: 16px 30px;
+  min-width: 210px;
+  margin-top: 34px; /* compensate so bird doesn't sit off-screen */
+}
+
+/* Centre the text inside the pill */
+.lead-float-kooka-v2 .lead-float-copy {
+  text-align: center;
+  gap: 5px;
+}
+
+.lead-float-kooka-v2 .lead-float-copy small {
+  font-size: 11px;
+  opacity: 0.72;
+}
+
+.lead-float-kooka-v2 .lead-float-copy strong {
+  font-size: 15px;
+}
+
+/* FREE badge — shift so it doesn't clash with bird */
+.lead-float-kooka-v2::after {
+  right: auto;
+  left: 50%;
+  top: -78px;
+  transform: translateX(32px);
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  .lead-float-kooka-v2 .kooka-v2 {
+    width: 70px;
+    height: 70px;
+    top: -56px;
+  }
+
+  .lead-float-kooka-v2 {
+    padding: 14px 22px;
+    min-width: 180px;
+    margin-top: 28px;
+  }
+}
