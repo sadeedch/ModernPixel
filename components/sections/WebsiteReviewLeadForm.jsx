@@ -131,35 +131,77 @@ ${data.projectMessage}
 
   return (
     <>
-
-   <button
+<button
   type="button"
   className="lead-float-button lead-float-kooka-v2"
   onClick={() => setIsOpen(true)}
   aria-label="Open free website review form"
 >
   <span className="kooka-v2" aria-hidden="true">
-    <i className="kooka-v2-shadow" />
-    <i className="kooka-v2-body" />
-    <i className="kooka-v2-wing" />
-    <i className="kooka-v2-head" />
-    <i className="kooka-v2-face" />
-    <i className="kooka-v2-eye" />
-    <i className="kooka-v2-beak" />
-    <i className="kooka-v2-feather feather-one" />
-    <i className="kooka-v2-feather feather-two" />
+    <svg viewBox="0 0 92 90" xmlns="http://www.w3.org/2000/svg" className="kooka-svg">
+      {/* Ground shadow */}
+      <ellipse cx="38" cy="87" rx="19" ry="3.5" fill="rgba(0,0,0,0.2)" />
+
+      {/* Body — warm brown */}
+      <ellipse cx="34" cy="67" rx="22" ry="17" fill="#7C5A1E" />
+
+      {/* Blue wing patch — kookaburra trait */}
+      <path d="M14 63 Q10 53 14 44 Q22 37 30 46 Q24 55 19 65 Z" fill="#4A7AB5" />
+      <path d="M17 65 Q13 55 16 47 Q22 42 27 49 Q23 57 20 66 Z" fill="#2D5A8A" opacity="0.45" />
+
+      {/* Tail feathers */}
+      <path d="M13 66 Q4 72 2 80 Q10 74 15 68 Z" fill="#4A2E0A" />
+      <path d="M12 70 Q3 76 1 84 Q9 79 14 72 Z" fill="#7C5A1E" opacity="0.6" />
+
+      {/* White chest and belly */}
+      <ellipse cx="40" cy="72" rx="13" ry="14" fill="#F5EFE0" />
+
+      {/* Neck — cream, bridges head to body */}
+      <path d="M36 54 Q44 49 53 52 Q55 60 51 64 Q42 65 37 60 Z" fill="#F5EFE0" />
+
+      {/* Head — large and round, key kookaburra trait */}
+      <ellipse cx="54" cy="40" rx="21" ry="18" fill="#F5EFE0" />
+
+      {/* Crown — dark brown streaks on top */}
+      <path d="M37 35 Q48 17 73 28 Q68 20 52 18 Q38 18 37 35 Z" fill="#3D2208" />
+      <path d="M45 33 Q53 21 69 29 Q65 24 54 23 Q46 23 45 33 Z" fill="#C8A870" opacity="0.35" />
+
+      {/* ═══ EYE STRIPE — most distinctive kookaburra feature ═══ */}
+      <path d="M35 36 Q46 27 72 36 L70 44 Q46 34 35 44 Z" fill="#1E1004" />
+
+      {/* Pale supercilium above the stripe */}
+      <path d="M43 33 Q53 27 69 33 Q66 29 54 28 Q46 28 43 33 Z" fill="rgba(255,255,255,0.45)" />
+
+      {/* Eye — drawn AFTER stripe so it sits on top */}
+      <circle cx="63" cy="39" r="6.5" fill="white" />
+      <circle cx="64" cy="38" r="4.5" fill="#0F0C1C" />
+      <circle cx="66" cy="36.5" r="1.6" fill="white" />
+
+      {/* ═══ BEAK — long and heavy, the kookaburra's signature ═══ */}
+      {/* Upper mandible */}
+      <path d="M72 36 L92 41.5 L73 47 Z" fill="#3D2208" />
+      {/* Lower mandible — slightly shorter and lighter */}
+      <path d="M73 45 L89 49 L75 53 Z" fill="#5C3610" />
+      {/* Beak midline seam */}
+      <line x1="72" y1="45" x2="91" y2="45.5" stroke="#2A1604" strokeWidth="0.7" opacity="0.5" />
+
+      {/* Feet / claws */}
+      <path
+        d="M30 83 L24 90 M30 83 L32 90 M42 83 L36 90 M42 83 L44 90"
+        stroke="#7C5A1E"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+    </svg>
   </span>
 
   <span className="lead-float-copy">
     <small>Need a sharper site?</small>
     <strong>Free Website Review</strong>
   </span>
-
-  <span className="lead-float-arrow" aria-hidden="true">
-    ↙
-  </span>
+  <span className="lead-float-arrow" aria-hidden="true">↙</span>
 </button>
-
       <div className={`lead-modal ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
         <button
           type="button"
