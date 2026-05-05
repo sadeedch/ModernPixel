@@ -1,4 +1,5 @@
 import './globals.css';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const siteUrl = 'https://www.modernpixel.com.au';
 
@@ -68,24 +69,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-  
-
-      <html lang="en">
-      <head>
-
-     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TN4552DRJ3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-TN4552DRJ3');
-</script>
-
-      </head>
-
+    <html lang="en">
       <body>{children}</body>
+
+      <GoogleAnalytics gaId="G-TN4552DRJ3" />
     </html>
   );
 }
