@@ -380,7 +380,7 @@ function MechanicScreen() {
       <rect width="600" height="460" fill="#f8f8f8" />
 
       {/* ══ LEFT COLUMN — red sidebar (160px wide) ══ */}
-      <rect width="160" height="460" fill="#dc2626" />
+      <rect width="160" height="460" fill="#d26666" />
 
       {/* Sidebar logo */}
       <rect x="16" y="18" width="28" height="28" rx="8" fill="rgba(255,255,255,0.18)" />
