@@ -1,40 +1,3 @@
-// import { workItems } from '@/data/siteData';
-
-// export default function Work() {
-//   return (
-//     <section id="work" className="work-section">
-//       <h2 className="section-title reveal">Recent Works</h2>
-//       <div className="work-stack">
-//         {workItems.map((item, index) => (
-//           <article key={item.number} className={`work-card reveal tone-${item.tone}`} style={{ '--i': index }}>
-//             <div className="work-left">
-//               <div className="work-number"><span /> {item.number}</div>
-//               <h3>{item.title}</h3>
-//               <p>{item.description}</p>
-//             </div>
-//             <div className="phone-art">
-//               <div className="phone-body">
-//                 <div className="phone-notch" />
-//                 <div className="phone-screen" />
-//               </div>
-//             </div>
-//             <div className="work-right">
-//               <h4>Services Provided</h4>
-//               <div className="chip-row">
-//                 {item.services.map((service) => <span key={service}>{service}</span>)}
-//               </div>
-//               <div className="metrics">
-//                 <div><small>{item.metricOneLabel}</small><strong>{item.metricOne}</strong></div>
-//                 <div><small>{item.metricTwoLabel}</small><strong>{item.metricTwo}</strong></div>
-//               </div>
-//             </div>
-//           </article>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
-
 'use client'
 
 import { useRef, useState, useEffect, useCallback } from 'react';
@@ -417,7 +380,7 @@ function MechanicScreen() {
       <rect width="600" height="460" fill="#f8f8f8" />
 
       {/* ══ LEFT COLUMN — red sidebar (160px wide) ══ */}
-      <rect width="160" height="460" fill="#b66e6e" />
+      <rect width="160" height="460" fill="#dc2626" />
 
       {/* Sidebar logo */}
       <rect x="16" y="18" width="28" height="28" rx="8" fill="rgba(255,255,255,0.18)" />
@@ -625,6 +588,14 @@ export default function Work({ workItems: items }) {
   const [active, setActive] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
   const [isDrag, setIsDrag] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 680);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const scrollToCard = useCallback((idx) => {
     if (!trackRef.current) return;
@@ -700,21 +671,38 @@ export default function Work({ workItems: items }) {
   };
 
   return (
-    <section id="work" style={S.section}>
-      <div style={S.header}>
+    <section id="work" style={{ ...S.section, padding: isMobile ? '72px 0 90px' : '120px 0 140px' }}>
+
+      {/* ── Header ── */}
+      <div style={{
+        ...S.header,
+        flexDirection: isMobile ? 'column' : 'row',
+        alignItems: isMobile ? 'flex-start' : 'flex-end',
+        margin: isMobile ? '0 auto 44px' : '0 auto 72px',
+        width: isMobile ? 'calc(100% - 32px)' : 'min(1320px,calc(100% - 48px))',
+      }}>
         <div>
-          <div style={S.kicker}><span style={S.dot} /> Selected Projects</div>
-          <h2 style={S.title}>Recent<br />Works</h2>
+          {!isMobile && <div style={S.kicker}><span style={S.dot} /> Selected Projects</div>}
+          <h2 style={{ ...S.title, fontSize: isMobile ? 'clamp(52px,14vw,80px)' : 'clamp(64px,7.5vw,112px)' }}>
+            Recent<br />Works
+          </h2>
         </div>
-        <div style={S.navRow}>
-          <button style={{...S.navBtn, opacity: active===0?0.3:1}} onClick={()=>scrollToCard(Math.max(0,active-1))} aria-label="Previous">←</button>
-          <button style={{...S.navBtn,...(active<workItems.length-1?S.navBtnActive:{opacity:0.3})}} onClick={()=>scrollToCard(Math.min(workItems.length-1,active+1))} aria-label="Next">→</button>
+        <div style={{ ...S.navRow, paddingBottom: isMobile ? 0 : '16px' }}>
+          <button style={{ ...S.navBtn, opacity: active === 0 ? 0.3 : 1 }} onClick={() => scrollToCard(Math.max(0, active - 1))} aria-label="Previous">←</button>
+          <button style={{ ...S.navBtn, ...(active < workItems.length - 1 ? S.navBtnActive : { opacity: 0.3 }) }} onClick={() => scrollToCard(Math.min(workItems.length - 1, active + 1))} aria-label="Next">→</button>
         </div>
       </div>
 
+      {/* ── Scrollable track ── */}
       <div
         ref={trackRef}
-        style={{...S.track, cursor: isDrag?'grabbing':'grab'}}
+        style={{
+          ...S.track,
+          cursor: isDrag ? 'grabbing' : 'grab',
+          paddingLeft: isMobile ? '16px' : 'max(40px,calc((100vw - 1320px)/2 + 24px))',
+          paddingRight: isMobile ? '16px' : '48px',
+          gap: isMobile ? '16px' : '28px',
+        }}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
@@ -727,51 +715,91 @@ export default function Work({ workItems: items }) {
           const [bg1, bg2] = CARD_BGTONES[i % CARD_BGTONES.length];
           const accent = CARD_ACCENTS[i % CARD_ACCENTS.length];
           const isHovered = hoveredCard === i;
+
           return (
             <article
               key={item.number}
               data-card={i}
-              style={{...S.card, ...(isHovered?{transform:'translateY(-10px)',boxShadow:'0 60px 130px rgba(0,0,0,0.46)'}:{})}}
-              onMouseEnter={()=>!isDrag&&setHoveredCard(i)}
-              onMouseLeave={()=>setHoveredCard(null)}
+              style={{
+                ...S.card,
+                // Mobile: full-width single column, desktop: side-by-side
+                width: isMobile ? 'calc(100vw - 32px)' : 'min(820px,84vw)',
+                minHeight: isMobile ? 'auto' : '520px',
+                gridTemplateColumns: isMobile ? '1fr' : '1.15fr 0.85fr',
+                gridTemplateRows: isMobile ? 'auto 230px' : '1fr',
+                ...(isHovered && !isMobile ? { transform: 'translateY(-10px)', boxShadow: '0 60px 130px rgba(0,0,0,0.46)' } : {}),
+              }}
+              onMouseEnter={() => !isDrag && setHoveredCard(i)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Mockup */}
-              <div style={S.mockupSide}>
-                <div style={{position:'absolute',inset:0,background:`linear-gradient(145deg,${bg1},${bg2})`}} />
-                <div style={{position:'absolute',inset:0,background:`radial-gradient(ellipse at 30% 30%,${accent}28,transparent 62%)`,pointerEvents:'none'}} />
-                <div style={S.browser}>
+              {/* INFO — order 1 on mobile (top), order 2 on desktop (right) */}
+              <div style={{
+                ...S.infoSide,
+                order: isMobile ? 1 : 2,
+                padding: isMobile ? '28px 24px 24px' : '44px 36px',
+                borderLeft: isMobile ? 'none' : '1px solid rgba(255,255,255,0.06)',
+                borderBottom: isMobile ? '1px solid rgba(255,255,255,0.06)' : 'none',
+              }}>
+                <div style={S.num}><span style={S.numDot} />Project {item.number}</div>
+                <h3 style={{ ...S.cardTitle, fontSize: isMobile ? '26px' : 'clamp(24px,2.6vw,34px)', marginBottom: isMobile ? '8px' : '12px' }}>
+                  {item.title}
+                </h3>
+                <p style={{ ...S.cardDesc, fontSize: isMobile ? '13px' : '13px', marginBottom: isMobile ? '18px' : '28px' }}>
+                  {item.description}
+                </p>
+                <div style={S.servicesLabel}>Services</div>
+                <div style={S.chips}>
+                  {item.services.map(s => <span key={s} style={S.chip}>{s}</span>)}
+                </div>
+                <div style={{ ...S.metricsRow, marginTop: isMobile ? '20px' : '32px', paddingTop: isMobile ? '16px' : '24px' }}>
+                  <div>
+                    <AnimatedValue value={item.metricOne} style={{ ...S.metricVal, fontSize: isMobile ? '28px' : 'clamp(26px,2.5vw,34px)' }} active={active === i} />
+                    <span style={S.metricLabel}>{item.metricOneLabel}</span>
+                  </div>
+                  <div>
+                    <AnimatedValue value={item.metricTwo} style={{ ...S.metricVal, fontSize: isMobile ? '28px' : 'clamp(26px,2.5vw,34px)' }} active={active === i} />
+                    <span style={S.metricLabel}>{item.metricTwoLabel}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* MOCKUP — order 2 on mobile (bottom strip), order 1 on desktop (left) */}
+              <div style={{
+                ...S.mockupSide,
+                order: isMobile ? 2 : 1,
+                borderRadius: isMobile ? '0 0 32px 32px' : '32px 0 0 32px',
+                height: isMobile ? '230px' : 'auto',
+              }}>
+                <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(145deg,${bg1},${bg2})` }} />
+                <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse at 30% 30%,${accent}28,transparent 62%)`, pointerEvents: 'none' }} />
+                <div style={{
+                  ...S.browser,
+                  top: isMobile ? '14px' : '28px',
+                  left: isMobile ? '14px' : '20px',
+                  right: isMobile ? '-14px' : '-20px',
+                  bottom: isMobile ? '-14px' : '-20px',
+                }}>
                   <div style={S.browserChrome}>
                     <div style={S.trafficLights}>
                       <div style={S.tl('#ff5f57')} /><div style={S.tl('#ffbd2e')} /><div style={S.tl('#28c840')} />
                     </div>
                     <div style={S.urlBar}>
-                      <span style={{fontSize:'8px',opacity:0.5}}>🔒</span>
-                      <span style={{color:'rgba(255,255,255,0.52)'}}>{URLS[i%URLS.length]}</span>
+                      <span style={{ fontSize: '8px', opacity: 0.5 }}>🔒</span>
+                      <span style={{ color: 'rgba(255,255,255,0.52)' }}>{URLS[i % URLS.length]}</span>
                     </div>
-                    <div style={{width:'9px',height:'9px',borderRadius:'50%',background:'rgba(255,255,255,0.07)',flexShrink:0}} />
+                    <div style={{ width: '9px', height: '9px', borderRadius: '50%', background: 'rgba(255,255,255,0.07)', flexShrink: 0 }} />
                   </div>
                   <div style={S.browserScreen}><Screen /></div>
                 </div>
-                <div style={{position:'absolute',bottom:'18px',left:'18px',padding:'5px 11px',background:'rgba(255,255,255,0.07)',backdropFilter:'blur(12px)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:'999px',color:'rgba(255,255,255,0.48)',fontSize:'10px',fontWeight:900,letterSpacing:'0.06em'}}>
-                  {item.number} / {String(workItems.length).padStart(2,'0')}
-                </div>
-              </div>
-              {/* Info */}
-              <div style={S.infoSide}>
-                <div style={S.num}><span style={S.numDot} />Project {item.number}</div>
-                <h3 style={S.cardTitle}>{item.title}</h3>
-                <p style={S.cardDesc}>{item.description}</p>
-                <div style={S.servicesLabel}>Services</div>
-                <div style={S.chips}>{item.services.map(s=><span key={s} style={S.chip}>{s}</span>)}</div>
-                <div style={S.metricsRow}>
-                  <div>
-                    <AnimatedValue value={item.metricOne} style={S.metricVal} active={active===i} />
-                    <span style={S.metricLabel}>{item.metricOneLabel}</span>
-                  </div>
-                  <div>
-                    <AnimatedValue value={item.metricTwo} style={S.metricVal} active={active===i} />
-                    <span style={S.metricLabel}>{item.metricTwoLabel}</span>
-                  </div>
+                {/* Index badge */}
+                <div style={{
+                  position: 'absolute', bottom: '14px', left: '14px',
+                  padding: '4px 10px',
+                  background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255,255,255,0.1)', borderRadius: '999px',
+                  color: 'rgba(255,255,255,0.48)', fontSize: '10px', fontWeight: 900, letterSpacing: '0.06em',
+                }}>
+                  {item.number} / {String(workItems.length).padStart(2, '0')}
                 </div>
               </div>
             </article>
@@ -779,17 +807,24 @@ export default function Work({ workItems: items }) {
         })}
       </div>
 
-      <div style={S.dotsRow}>
-        {workItems.map((_,i) => (
-          <button key={i} aria-label={`Project ${i+1}`}
-            style={{height:'4px',borderRadius:'999px',border:'none',padding:0,cursor:'pointer',
-              background:active===i?'#6e52bd':'rgba(255,255,255,0.15)',
-              width:active===i?'28px':'14px',transition:'0.3s ease'}}
-            onClick={()=>scrollToCard(i)}
+      {/* ── Dot navigation ── */}
+      <div style={{
+        ...S.dotsRow,
+        width: isMobile ? 'calc(100% - 32px)' : 'min(1320px,calc(100% - 48px))',
+        margin: isMobile ? '28px auto 0' : '44px auto 0',
+      }}>
+        {workItems.map((_, i) => (
+          <button key={i} aria-label={`Project ${i + 1}`}
+            style={{
+              height: '4px', borderRadius: '999px', border: 'none', padding: 0, cursor: 'pointer',
+              background: active === i ? '#6e52bd' : 'rgba(255,255,255,0.15)',
+              width: active === i ? '28px' : '14px', transition: '0.3s ease',
+            }}
+            onClick={() => scrollToCard(i)}
           />
         ))}
-        <span style={{marginLeft:'auto',color:'rgba(255,255,255,0.22)',fontSize:'12px',fontWeight:800,letterSpacing:'0.04em'}}>
-          Drag to explore →
+        <span style={{ marginLeft: 'auto', color: 'rgba(255,255,255,0.22)', fontSize: '12px', fontWeight: 800, letterSpacing: '0.04em' }}>
+          {isMobile ? 'Swipe to explore →' : 'Drag to explore →'}
         </span>
       </div>
     </section>
