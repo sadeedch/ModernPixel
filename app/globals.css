@@ -2673,9 +2673,9 @@ button { font: inherit; color: inherit; }
 
 /* Fix 2 — bird 30% bigger */
 .lead-float-kooka-v2 .kooka-v2 {
-  width: 120px;
-  height: 120px;
- top: -122px; 
+  width: 130px;
+  height: 130px;
+ top: -132px; 
 }
 
 /* Bump margin-top so the bigger bird doesn't clip the screen top */
