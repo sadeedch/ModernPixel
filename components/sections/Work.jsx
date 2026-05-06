@@ -401,10 +401,187 @@ function LandingScreen() {
   );
 }
 
-const SCREENS = [BrandingScreen, PortalScreen, LandingScreen];
-const URLS = ['elevateelectrical.com.au','app.claritybookings.com.au/dashboard','procleanbrisbane.com.au'];
-const CARD_BGTONES = [['#1a0d00','#2a1500'],['#061428','#0d2244'],['#061a0f','#0d2e18']];
-const CARD_ACCENTS = ['#f97316','#2563eb','#059669'];
+// ── Screen 4: Redline Auto — light booking/pricing page (totally different layout) ──
+function MechanicScreen() {
+  const services = [
+    { name: 'Log Book Service',    price: '$189', time: '2–3 hrs',  popular: true  },
+    { name: 'Brake Replacement',   price: '$220', time: '1–2 hrs',  popular: false },
+    { name: 'Engine Diagnostics',  price: '$99',  time: '45 min',   popular: false },
+    { name: 'Tyres & Alignment',   price: '$149', time: '1 hr',     popular: false },
+    { name: 'Air Con Regas',       price: '$120', time: '30 min',   popular: false },
+  ];
+  return (
+    <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
+
+      {/* ── Full white background ── */}
+      <rect width="600" height="460" fill="#f8f8f8" />
+
+      {/* ══ LEFT COLUMN — red sidebar (160px wide) ══ */}
+      <rect width="160" height="460" fill="#b66e6e" />
+
+      {/* Sidebar logo */}
+      <rect x="16" y="18" width="28" height="28" rx="8" fill="rgba(255,255,255,0.18)" />
+      <text x="30" y="36" fontFamily="system-ui,sans-serif" fontSize="16" textAnchor="middle">🔧</text>
+      <text x="52" y="29" fontFamily="system-ui,sans-serif" fontSize="11" fontWeight="800" fill="#fff">Redline</text>
+      <text x="52" y="41" fontFamily="system-ui,sans-serif" fontSize="11" fontWeight="800" fill="rgba(255,255,255,0.7)">Auto</text>
+
+      {/* Sidebar divider */}
+      <line x1="16" y1="58" x2="144" y2="58" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+
+      {/* Sidebar nav */}
+      {[
+        { label: 'Book a Service', active: true  },
+        { label: 'Our Services',   active: false },
+        { label: 'Pricing',        active: false },
+        { label: 'About Us',       active: false },
+        { label: 'Contact',        active: false },
+      ].map((item, i) => (
+        <g key={i}>
+          <rect x="10" y={68 + i * 36} width="140" height="28" rx="7"
+            fill={item.active ? 'rgba(255,255,255,0.2)' : 'transparent'} />
+          <rect x="18" y={77 + i * 36} width="8" height="10" rx="2"
+            fill={item.active ? '#fff' : 'rgba(255,255,255,0.3)'} />
+          <text x="32" y={86 + i * 36} fontFamily="system-ui,sans-serif" fontSize="10"
+            fontWeight={item.active ? '700' : '500'}
+            fill={item.active ? '#fff' : 'rgba(255,255,255,0.6)'}>{item.label}</text>
+        </g>
+      ))}
+
+      {/* Sidebar trust badges */}
+      <line x1="16" y1="256" x2="144" y2="256" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
+      {[
+        { icon: '✅', label: '12M Warranty' },
+        { icon: '🏆', label: '4.9 ★ Google' },
+        { icon: '📍', label: 'Fortitude Valley' },
+        { icon: '📞', label: '07 3123 4567' },
+      ].map((b, i) => (
+        <g key={i}>
+          <text x="18" y={276 + i * 28} fontSize="10">{b.icon}</text>
+          <text x="34" y={276 + i * 28} fontFamily="system-ui,sans-serif" fontSize="9" fontWeight="600" fill="rgba(255,255,255,0.75)">{b.label}</text>
+        </g>
+      ))}
+
+      {/* Sidebar CTA */}
+      <rect x="14" y="396" width="132" height="36" rx="10" fill="rgba(0,0,0,0.22)" />
+      <text x="80" y="417" fontFamily="system-ui,sans-serif" fontSize="10" fontWeight="800" fill="#fff" textAnchor="middle">📞 Call Now</text>
+      <text x="80" y="428" fontFamily="system-ui,sans-serif" fontSize="8" fill="rgba(255,255,255,0.6)" textAnchor="middle">07 3123 4567</text>
+
+      {/* ══ RIGHT AREA — main content ══ */}
+
+      {/* ── Top bar ── */}
+      <rect x="160" y="0" width="440" height="48" fill="#fff" />
+      <line x1="160" y1="47" x2="600" y2="47" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
+      <text x="176" y="20" fontFamily="system-ui,sans-serif" fontSize="13" fontWeight="800" fill="#1a1a1a">Book a Service</text>
+      <text x="176" y="35" fontFamily="system-ui,sans-serif" fontSize="9" fill="rgba(0,0,0,0.4)">Select your vehicle and choose a service below</text>
+      {/* Step indicator */}
+      {['Vehicle', 'Service', 'Time', 'Confirm'].map((step, i) => (
+        <g key={i}>
+          <rect x={390 + i * 50} y="16" width="36" height="18" rx="9"
+            fill={i === 0 ? '#dc2626' : i === 1 ? 'rgba(220,38,38,0.12)' : '#f3f4f6'} />
+          <text x={408 + i * 50} y="29" fontFamily="system-ui,sans-serif" fontSize="7.5"
+            fontWeight="700" textAnchor="middle"
+            fill={i === 0 ? '#fff' : i === 1 ? '#dc2626' : 'rgba(0,0,0,0.3)'}>{step}</text>
+        </g>
+      ))}
+
+      {/* ── Vehicle selector ── */}
+      <rect x="160" y="48" width="440" height="72" fill="#fff" />
+      <line x1="160" y1="119" x2="600" y2="119" stroke="rgba(0,0,0,0.07)" strokeWidth="1" />
+      <text x="176" y="66" fontFamily="system-ui,sans-serif" fontSize="10" fontWeight="700" fill="#1a1a1a">Your Vehicle</text>
+      {/* Three dropdowns */}
+      {[
+        { label: 'Make', value: 'Toyota' },
+        { label: 'Model', value: 'Camry' },
+        { label: 'Year', value: '2019' },
+      ].map((d, i) => (
+        <g key={i}>
+          <rect x={176 + i * 136} y="72" width="122" height="36" rx="8" fill="#f9fafb" />
+          <rect x={176 + i * 136} y="72" width="122" height="36" rx="8" fill="none"
+            stroke={i === 0 ? '#dc2626' : 'rgba(0,0,0,0.1)'} strokeWidth={i === 0 ? '1.5' : '1'} />
+          <text x={184 + i * 136} y="86" fontFamily="system-ui,sans-serif" fontSize="7.5" fill="rgba(0,0,0,0.38)">{d.label}</text>
+          <text x={184 + i * 136} y="100" fontFamily="system-ui,sans-serif" fontSize="10" fontWeight="700" fill="#1a1a1a">{d.value}</text>
+          <text x={284 + i * 136} y="95" fontFamily="system-ui,sans-serif" fontSize="10" fill="rgba(0,0,0,0.3)" textAnchor="middle">⌄</text>
+        </g>
+      ))}
+
+      {/* ── Service list ── */}
+      <rect x="160" y="120" width="268" height="340" fill="#fff" />
+      <text x="176" y="142" fontFamily="system-ui,sans-serif" fontSize="10" fontWeight="700" fill="#1a1a1a">Select a Service</text>
+      <text x="176" y="154" fontFamily="system-ui,sans-serif" fontSize="8" fill="rgba(0,0,0,0.35)">Prices shown for Toyota Camry 2019</text>
+
+      {services.map((svc, i) => (
+        <g key={i}>
+          <rect x="170" y={162 + i * 52} width="250" height="44" rx="8"
+            fill={i === 0 ? '#fff5f5' : '#fff'} />
+          <rect x="170" y={162 + i * 52} width="250" height="44" rx="8" fill="none"
+            stroke={i === 0 ? '#dc2626' : 'rgba(0,0,0,0.08)'} strokeWidth={i === 0 ? '1.5' : '1'} />
+          {/* Radio dot */}
+          <circle cx="186" cy={184 + i * 52} r="6" fill="none" stroke={i === 0 ? '#dc2626' : 'rgba(0,0,0,0.2)'} strokeWidth="1.5" />
+          {i === 0 && <circle cx="186" cy="184" r="3.5" fill="#dc2626" />}
+          <text x="198" y={180 + i * 52} fontFamily="system-ui,sans-serif" fontSize="10" fontWeight={i === 0 ? '700' : '600'} fill="#1a1a1a">{svc.name}</text>
+          <text x="198" y={193 + i * 52} fontFamily="system-ui,sans-serif" fontSize="8" fill="rgba(0,0,0,0.38)">Est. {svc.time}</text>
+          {svc.popular && (
+            <>
+              <rect x="282" y={164 + i * 52} width="42" height="13" rx="6" fill="#dc2626" />
+              <text x="303" y={174 + i * 52} fontFamily="system-ui,sans-serif" fontSize="7" fontWeight="700" fill="#fff" textAnchor="middle">POPULAR</text>
+            </>
+          )}
+          <text x="400" y={186 + i * 52} fontFamily="system-ui,sans-serif" fontSize="12" fontWeight="800"
+            fill={i === 0 ? '#dc2626' : '#1a1a1a'} textAnchor="end">{svc.price}</text>
+        </g>
+      ))}
+
+      {/* ── Quote panel (right column) ── */}
+      <rect x="428" y="120" width="172" height="340" fill="#f9fafb" />
+      <line x1="428" y1="120" x2="428" y2="460" stroke="rgba(0,0,0,0.07)" strokeWidth="1" />
+
+      <text x="444" y="144" fontFamily="system-ui,sans-serif" fontSize="10" fontWeight="700" fill="#1a1a1a">Your Quote</text>
+
+      {/* Vehicle summary */}
+      <rect x="436" y="150" width="156" height="38" rx="8" fill="#fff" />
+      <rect x="436" y="150" width="156" height="38" rx="8" fill="none" stroke="rgba(0,0,0,0.08)" strokeWidth="1" />
+      <text x="444" y="164" fontFamily="system-ui,sans-serif" fontSize="8.5" fontWeight="700" fill="#1a1a1a">🚗  Toyota Camry 2019</text>
+      <text x="444" y="177" fontFamily="system-ui,sans-serif" fontSize="8" fill="rgba(0,0,0,0.38)">2.5L Petrol · Automatic</text>
+
+      {/* Selected service */}
+      <text x="444" y="206" fontFamily="system-ui,sans-serif" fontSize="9" fontWeight="700" fill="#1a1a1a">Selected</text>
+      <rect x="436" y="210" width="156" height="32" rx="8" fill="#fff5f5" />
+      <rect x="436" y="210" width="156" height="32" rx="8" fill="none" stroke="rgba(220,38,38,0.2)" strokeWidth="1" />
+      <text x="444" y="224" fontFamily="system-ui,sans-serif" fontSize="9" fontWeight="700" fill="#dc2626">Log Book Service</text>
+      <text x="444" y="235" fontFamily="system-ui,sans-serif" fontSize="8" fill="rgba(0,0,0,0.38)">Incl. oil, filter &amp; 55pt check</text>
+
+      {/* Pricing breakdown */}
+      <line x1="436" y1="254" x2="592" y2="254" stroke="rgba(0,0,0,0.07)" strokeWidth="1" />
+      {[
+        { label: 'Service', value: '$189.00' },
+        { label: 'Parts est.', value: '$42.00' },
+        { label: 'GST (10%)', value: '$23.10' },
+      ].map((row, i) => (
+        <g key={i}>
+          <text x="444" y={270 + i * 18} fontFamily="system-ui,sans-serif" fontSize="8.5" fill="rgba(0,0,0,0.45)">{row.label}</text>
+          <text x="586" y={270 + i * 18} fontFamily="system-ui,sans-serif" fontSize="8.5" fontWeight="600" fill="#1a1a1a" textAnchor="end">{row.value}</text>
+        </g>
+      ))}
+      <line x1="436" y1="324" x2="592" y2="324" stroke="rgba(0,0,0,0.1)" strokeWidth="1" />
+      <text x="444" y="338" fontFamily="system-ui,sans-serif" fontSize="10" fontWeight="800" fill="#1a1a1a">Total</text>
+      <text x="586" y="338" fontFamily="system-ui,sans-serif" fontSize="13" fontWeight="800" fill="#dc2626" textAnchor="end">$254.10</text>
+      <text x="444" y="350" fontFamily="system-ui,sans-serif" fontSize="7.5" fill="rgba(0,0,0,0.35)">Est. 2–3 hrs · No hidden fees</text>
+
+      {/* Book CTA */}
+      <rect x="436" y="360" width="156" height="36" rx="10" fill="#dc2626" />
+      <text x="514" y="382" fontFamily="system-ui,sans-serif" fontSize="10.5" fontWeight="800" fill="#fff" textAnchor="middle">Confirm Booking →</text>
+
+      {/* Warranty note */}
+      <text x="514" y="408" fontFamily="system-ui,sans-serif" fontSize="8" fill="rgba(0,0,0,0.35)" textAnchor="middle">✅ Covered by 12-month warranty</text>
+      <text x="514" y="420" fontFamily="system-ui,sans-serif" fontSize="8" fill="rgba(0,0,0,0.35)" textAnchor="middle">Pay on the day · No deposit</text>
+    </svg>
+  );
+}
+
+const SCREENS = [BrandingScreen, PortalScreen, LandingScreen, MechanicScreen];
+const URLS = ['elevateelectrical.com.au','app.claritybookings.com.au/dashboard','procleanbrisbane.com.au','redlineauto.com.au'];
+const CARD_BGTONES = [['#1a0d00','#2a1500'],['#061428','#0d2244'],['#061a0f','#0d2e18'],['#1a0808','#2a0e0e']];
+const CARD_ACCENTS = ['#f97316','#2563eb','#059669','#dc2626'];
 
 export default function Work({ workItems: items }) {
   const workItems = items || [
@@ -428,6 +605,13 @@ export default function Work({ workItems: items }) {
       services:['SEO','Landing Page','Analytics'],
       metricOneLabel:'Mobile traffic ready', metricOne:'71%',
       metricTwoLabel:'Lead capture', metricTwo:'24/7',
+    },
+    {
+      number:'04', title:'Auto Service Website',
+      description:'A high-converting mechanic site for a Brisbane workshop — online bookings, service pricing, and trust signals built to win walk-ins.',
+      services:['Web Design','SEO','Bookings'],
+      metricOneLabel:'Online bookings', metricOne:'3.1x',
+      metricTwoLabel:'Google ranking', metricTwo:'#1',
     },
   ];
 
