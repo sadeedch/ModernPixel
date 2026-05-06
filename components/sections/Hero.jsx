@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { navItems } from '@/data/siteData';
 import HeroArtwork from '@/components/visuals/HeroArtwork';
+import Image from 'next/image';
 
 export default function Hero() {
   const heroRef = useRef(null);
@@ -30,7 +31,7 @@ export default function Hero() {
       <div className="hero-grid" />
 
       <nav className="top-nav reveal">
-        <a className="logo" href="#home" aria-label="ModernPixel home">
+        {/* <a className="logo" href="#home" aria-label="ModernPixel home">
           <span className="logo-icon">
             <i />
             <i />
@@ -40,7 +41,22 @@ export default function Hero() {
             <i />
           </span>
           <strong>ModernPixel</strong>
-        </a>
+        </a> */}
+
+ <Image
+  src="/logo2.png"
+  alt="ModernPixel"
+  width={340}
+  height={80}
+  priority
+  style={{
+    objectFit: 'contain',
+    objectPosition: 'left center',
+    width: '220px',
+    height: 'auto',
+  }}
+/>
+
 
         <div className="nav-pill">
           {navItems.map((item) => {

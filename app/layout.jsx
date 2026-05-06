@@ -7,7 +7,7 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: 'ModernPixel | Web Design & Next.js Websites Brisbane',
+    default: 'Web Design Brisbane | Web Development Company Brisbane | ModernPixel',
     template: '%s | ModernPixel',
   },
 
