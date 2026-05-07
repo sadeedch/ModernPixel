@@ -5,6 +5,10 @@ export default function Footer() {
         <strong>ModernPixel</strong>
         <p>Brisbane, Australia</p>
       </div>
+       <div>
+        
+        <p>ABN: 79 148 103 582</p>
+      </div>
       <div>
      <a style={{fontSize: "24px"}}>📞</a> <a style={{fontSize: "24px", color: "#550dca"}} href="tel:0450237005">0450 237 005</a> 
      <br/>
