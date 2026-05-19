@@ -8,7 +8,7 @@ import Testimonials from '@/components/sections/Testimonials';
 import ContactFaq from '@/components/sections/ContactFaq';
 import Footer from '@/components/layout/Footer';
 import WebsiteReviewLeadForm from '@/components/sections/WebsiteReviewLeadForm';
-import WebsiteReviewLeadForm from '@/components/sections/PricingSection';
+import PricingSection from '@/components/sections/PricingSection';
 
 export default function HomePage() {
 
