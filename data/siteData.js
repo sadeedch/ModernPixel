@@ -114,7 +114,7 @@ export const faqs = [
   ],
   [
     'How long does a website usually take?',
-    'A smaller business website can usually be completed in 2 to 4 weeks. Larger sites, product interfaces, or custom systems may take longer depending on scope.'
+    'A smaller business website can usually be completed in 1 to 2 weeks. Larger sites, product interfaces, or custom systems may take longer depending on scope.'
   ],
   [
     'How do we start?',
