@@ -210,8 +210,8 @@ ${data.projectMessage}
                 <span>Foundations included</span>
               </div>
               <div>
-                <strong>Fast</strong>
-                <span>Next.js-ready builds</span>
+                <strong>Fast & Responsive</strong>
+                <span>Ready builds</span>
               </div>
             </div>
           </div>
